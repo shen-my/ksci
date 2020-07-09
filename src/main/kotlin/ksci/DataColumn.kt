@@ -4,6 +4,9 @@ import java.lang.RuntimeException
 import kotlin.math.log2
 
 open class DataColumn(val type: DataType, val data: MutableList<Any?> = mutableListOf()) {
+
+    constructor(type: DataType, data: Collection<Any?>): this(type, data.toMutableList())
+
     val count: Int
         get() = data.size
 

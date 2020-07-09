@@ -39,7 +39,6 @@ class DecisionTree {
         var minEntropy = Float.MAX_VALUE
         var bestColumn = x.columnNames[0]
 
-        println("Total entropy: ${y.entropy()}")
         x.forEachColumn { (name, column) ->
             if (name in usedProperties)
                 return@forEachColumn
@@ -47,8 +46,6 @@ class DecisionTree {
             val entropy = column.group().map { (_, indices) ->
                 y[indices].entropy() * (indices.size / x.count.toFloat())
             }.reduce(Float::plus)
-
-            println("$name entropy: $entropy")
 
             if (entropy < minEntropy) {
                 minEntropy = entropy
@@ -61,8 +58,6 @@ class DecisionTree {
             return Leaf(y.mode<Any>()[0]!!)
 
         val decisionColumn = x[bestColumn]
-        println(bestColumn)
-        println()
         usedProperties.add(bestColumn)
         val router = decisionColumn.group().mapValues { (_, indices) ->
             build(x[indices], y[indices])

@@ -16,7 +16,7 @@ class DataFrame {
     val count
         get() = if (columns.isEmpty()) 0 else columns[0].count
 
-    private val indices
+    val indices
         get() = 0 until count
 
     fun isEmpty() = columns.isEmpty() || columns[0].isEmpty()
