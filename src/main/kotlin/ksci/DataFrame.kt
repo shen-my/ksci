@@ -33,6 +33,12 @@ class DataFrame {
         columnNames.zip(columns).forEach(acceptor)
     }
 
+    fun forEach(acceptor: (Map<String, Any?>) -> Unit) {
+        indices.forEach {
+            acceptor(get(it))
+        }
+    }
+
     fun remove(name: String): DataColumn {
         if (name !in titles) throw IllegalArgumentException("Can not find column with name($name)")
         val index = titles.indexOf(name)
